@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FillFinder - Add a Pharmacy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-brand">
+                    <img src="/static/pill.png" alt="FillFinder Logo" class="nav-logo">
+                    <span>FillFinder</span>
+                </div>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/locate_pharmacy">Find a Pharmacy</a></li>
+                    <li><a href="/add_pharmacy">Report a Pharmacy</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/adderall_info">Adderall Info</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Add a Pharmacy</h1>
+        
+        <div class="card">
+            <p>Search for a pharmacy and select it from the list or the map to report it.</p>
+            <input type="text" id="searchInput" placeholder="Search for a pharmacy">
+            <button onclick="searchPharmacies()" class="btn">Search</button>
+        </div>
+
+        <div id="message" class="card" style="display:none;"></div>
+
+        <div id="pharmacyList" class="card" style="display:none;"></div>
+
+        <div id="map" style="height:400px; width:100%; display:none;"></div>
+
+        <div id="reportForm" class="card" style="display:none;">
+            <h2>Report this Pharmacy</h2>
+            <label for="date">Date Prescription was Filled:</label>
+            <input type="date" id="date" required>
+            <button onclick="submitReport()" class="btn">Submit</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 FillFinder. All rights reserved.</p>
+            <p class="attribution">
+                <a href="https://www.flaticon.com/free-icons/pill" title="pill icons">Pill icons created by Good Ware - Flaticon</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="/static/scripts_add.js"></script>
+</body>
+</html>

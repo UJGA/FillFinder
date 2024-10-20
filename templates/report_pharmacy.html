@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FillFinder - Report Pharmacy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="nav-brand">
+                    <img src="/static/pill.png" alt="FillFinder Logo" class="nav-logo">
+                    <span>FillFinder</span>
+                </div>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/locate_pharmacy">Find a Pharmacy</a></li>
+                    <li><a href="/add_pharmacy">Report a Pharmacy</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/adderall_info">Adderall Info</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Report Pharmacy</h1>
+        
+        <div class="card" id="pharmacyDetails">
+            <h2>{{ name }}</h2>
+            <p>Address: {{ address }}</p>
+        </div>
+
+        <div class="card">
+            <form id="reportForm">
+                <input type="hidden" id="name" value="{{ name }}">
+                <input type="hidden" id="address" value="{{ address }}">
+                <input type="hidden" id="lat" value="{{ lat }}">
+                <input type="hidden" id="lon" value="{{ lng }}">
+                <input type="hidden" id="place_id" value="{{ place_id }}">
+                
+                <label for="date">Date Prescription was Filled:</label>
+                <input type="date" id="date" required>
+                
+                <button type="submit" class="btn">Submit Report</button>
+            </form>
+        </div>
+
+        <div id="successMessage" class="card" style="display:none;">
+            <h2>Thank You!</h2>
+            <p>Your report has been successfully submitted. Thank you for helping others in the community!</p>
+            <button onclick="window.location.href='/add_pharmacy'" class="btn">Back to Search</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 FillFinder. All rights reserved.</p>
+            <p class="attribution">
+                <a href="https://www.flaticon.com/free-icons/pill" title="pill icons">Pill icons created by Good Ware - Flaticon</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const pharmacyData = {
+                name: document.getElementById('name').value,
+                address: document.getElementById('address').value,
+                lat: document.getElementById('lat').value,
+                lon: document.getElementById('lon').value,
+                date: document.getElementById('date').value,
+                zip_code: document.getElementById('address').value.match(/\b\d{5}\b(?![-\d])/)[0]
+            };
+
+            fetch('/submit_report', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(pharmacyData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('reportForm').style.display = 'none';
+                document.getElementById('successMessage').style.display = 'block';
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the report. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>
