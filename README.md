@@ -36,7 +36,7 @@ FillFinder is a community-driven platform. While we strive to provide accurate a
 
 ## Contributing
 
-We welcome contributions to FillFinder! If you're interested in helping improve the platform, please check out our [Contributing Guidelines](CONTRIBUTING.md).
+We welcome contributions to FillFinder!
 
 ## Support
 
